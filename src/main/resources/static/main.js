@@ -1,4 +1,4 @@
-var FACTORIAL_URL = '/factorial/30000';
+var FACTORIAL_URL = '/factorial/21000';
 var TEMPERATURE_URL = '/temperature';
 
 function generateWorkload() {
