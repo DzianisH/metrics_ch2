@@ -2,7 +2,7 @@ version: '3.2'
 
 services:
   metrics_app:
-    image: dash39/metrics_app
+    image: dzianish/metrics_app
     ports:
       - "8080:8080"
     restart: unless-stopped
@@ -19,10 +19,3 @@ services:
         target: /etc/config
     restart: unless-stopped
     container_name: prometheus
-
-  grafana:
-    image: grafana/grafana
-    ports:
-      - "3000:3000"
-    restart: unless-stopped
-    container_name: grafana

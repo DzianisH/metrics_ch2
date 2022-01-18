@@ -1,8 +1,8 @@
-var FACTORIAL_URL = '/factorial/21000';
+var FACTORIAL_URL = '/factorial/20000';
 var TEMPERATURE_URL = '/temperature';
 
 function generateWorkload() {
-    callWithInterval(() => infiniteReload(FACTORIAL_URL), 300, 8);
+    callWithInterval(() => infiniteReload(FACTORIAL_URL), 50, 8);
 
     infiniteReload(TEMPERATURE_URL, 60000);
 

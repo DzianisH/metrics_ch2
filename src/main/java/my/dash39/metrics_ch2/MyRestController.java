@@ -1,11 +1,16 @@
 package my.dash39.metrics_ch2;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigInteger;
+
+import static org.springframework.http.HttpHeaders.EXPIRES;
+import static org.springframework.http.HttpHeaders.PRAGMA;
 
 @RestController
 public class MyRestController {
@@ -19,17 +24,26 @@ public class MyRestController {
     }
 
     @GetMapping("/hello-world")
-    public String helloWorld() {
-        return "Hello my dear world!";
+    public ResponseEntity<String> helloWorld() {
+        return buildResponseEntity("Hello my dear world!");
     }
 
     @GetMapping("/factorial/{val}")
-    public BigInteger calcFactorial(@PathVariable BigInteger val) {
-        return mathService.calcFactorial(val);
+    public ResponseEntity<BigInteger> calcFactorial(@PathVariable BigInteger val) {
+        return buildResponseEntity(mathService.calcFactorial(val));
     }
 
     @GetMapping("/temperature")
-    public String getCurrentLocalTemperature() {
-        return temperatureService.getCurrentLocalTemperature();
+    public ResponseEntity<String> getCurrentLocalTemperature() {
+        return buildResponseEntity(temperatureService.getCurrentLocalTemperature());
+    }
+
+
+    private <T> ResponseEntity<T> buildResponseEntity(T body) {
+        return ResponseEntity.ok()
+                .cacheControl(CacheControl.noStore().mustRevalidate())
+                .header(PRAGMA, "no-cache")
+                .header(EXPIRES, "0")
+                .body(body);
     }
 }

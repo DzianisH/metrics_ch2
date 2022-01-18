@@ -27,11 +27,11 @@ public class TemperatureService {
     }
 
     private String extractTemperature(String html) {
-        return extractData(html, TEMPERATURE_PATTERN, "<unknown temperature>");
+        return extractData(html, TEMPERATURE_PATTERN, "[unknown temperature]");
     }
 
     private String extractCity(String html) {
-        return extractData(html, CITY_PATTERN, "<unknown city>");
+        return extractData(html, CITY_PATTERN, "[unknown city]");
     }
 
     private String extractData(String html, Pattern pattern, String fallbackMessage) {
